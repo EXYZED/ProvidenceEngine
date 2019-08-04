@@ -14,7 +14,7 @@ local EventDirectory = game:GetService'ReplicatedStorage':WaitForChild'EventFold
 ---
 local Module = {}
 
-function CreateEvents()
+function Module:CreateEvents()
   -- Event to deal with sprint
   local SprintRemote = Instance.new("RemoteEvent");
   SprintRemote.Name = "SprinterRemote"
