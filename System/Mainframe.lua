@@ -10,10 +10,15 @@ local System = script.Parent
 ---
 
 Players.PlayerAdded:Connect(function(Player)
+  local ScriptFolder = Instance.new('Folder')
+  ScriptFolder.Name = 'ClientScripts'
+
   for i, child in ipairs(Client:GetChildren()) do
   	local Script = child:Clone()
-    Script.Parent = Player.PlayerScripts
+    Script.Parent = ScriptFolder
   end
+
+  ScriptFolder.Parent = Player.PlayerGui
 end)
 
 Players.PlayerRemoving:Connect(function(player)
