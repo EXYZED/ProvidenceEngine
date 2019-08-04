@@ -11,6 +11,7 @@ Privilege:      Y
 ]]
 --Test
 local EventDirectory = game:GetService'ReplicatedStorage':WaitForChild'EventFolder';
+local sprintSpeed    = 20
 ---
 local Module = {}
 
@@ -29,7 +30,7 @@ function Module:CreateEvents()
   end)
   --
   local GenericEvent = Instance.new("RemoteEvent")
-  GenericEvent.Name = "GenericEvent"
+  GenericEvent.Name = "GenericExampleEvent"
   GenericEvent.Parent = EventDirectory;
   SprintRemote.OnServerEvent:Connect(function()
     print'Hello World!'
