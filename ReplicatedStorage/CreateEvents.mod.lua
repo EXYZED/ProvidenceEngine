@@ -11,7 +11,7 @@ Privilege:      Y
 ]]
 --Test
 local EventDirectory = game:GetService'ReplicatedStorage':WaitForChild'EventFolder';
-local sprintSpeed    = 20
+local sprintSpeed    = 25
 ---
 local Module = {}
 
