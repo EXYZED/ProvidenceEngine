@@ -31,12 +31,11 @@ local DataSources = {}
 
 -- Helper Functions
 local ScriptTypes = {
-	[""] = "ModuleScript";
+	[""] = "Script";
 	["local"] = "LocalScript";
 	["module"] = "ModuleScript";
 	["mod"] = "ModuleScript";
 	["loc"] = "LocalScript";
-	["lua"] = "Script"
 }
 
 local function UrlDecode(Character)
