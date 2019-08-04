@@ -268,7 +268,7 @@ function GitHub:Install(Link, Parent, RoutineList)
 	end
 end
 
-GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/Engine", game:GetService("ServerScriptService")).Name = "ProvidenceEngine"
+GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/", game:GetService("ServerScriptService")).Name = "ProvidenceEngine"
 --local init = GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/Loader/ReplicatedStorage/ProvidenceEngine/Initialise.lua")
 --init.Name = "ProvidenceEngine"
 --init.Parent = game:GetService("ReplicatedStorage")
