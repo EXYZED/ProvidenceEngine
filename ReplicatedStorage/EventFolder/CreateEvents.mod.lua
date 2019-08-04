@@ -19,7 +19,7 @@ function CreateEvents()
   local SprintRemote = Instance.new("RemoteEvent");
   SprintRemote.Name = "SprintingRemote"
   SprintRemote.Parent = EventDirectory;
-  SprintRemote.OnServerEvent:Connect(function(player,info))
+  SprintRemote.OnServerEvent:Connect(function(player,info)
       if tostring(info) == "EndSprint" then
           player.Character.Humanoid.WalkSpeed = 16
       end
