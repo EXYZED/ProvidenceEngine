@@ -268,7 +268,7 @@ function GitHub:Install(Link, Parent, RoutineList)
 end
 
 GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/", game:GetService("ServerScriptService")).Name = "Providence"
-local Installer = game.ServerScriptService:FindFirstChild("ProvidenceEngine"):FindFirstChild("Installer")
+local Installer = game.ServerScriptService:WaitForChild("ProvidenceEngine"):WaitForChild("Installer")
 if Installer then
 	Installer:Destroy();
 end
