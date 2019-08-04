@@ -17,7 +17,7 @@ local Module = {}
 function CreateEvents()
   -- Event to deal with sprint
   local SprintRemote = Instance.new("RemoteEvent");
-  SprintRemote.Name = "SprintingRemote"
+  SprintRemote.Name = "SprinterRemote"
   SprintRemote.Parent = EventDirectory;
   SprintRemote.OnServerEvent:Connect(function(player,info)
       if tostring(info) == "EndSprint" then
