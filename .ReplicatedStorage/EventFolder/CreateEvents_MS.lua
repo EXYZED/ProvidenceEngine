@@ -9,7 +9,7 @@ Issuer, A:      XLNS_XYZ Danté#9120
 Privilege:      Y
 
 ]]
-
+--Test
 local EventDirectory = game:GetService'ReplicatedStorage':WaitForChild'EventFolder';
 ---
 local Module = {}
@@ -17,6 +17,7 @@ local Module = {}
 function CreateEvents()
   -- Event to deal with sprint
   local SprintRemote = Instance.new("RemoteEvent");
+  SprintRemote.Name = "SprintingRemote"
   SprintRemote.Parent = EventDirectory;
   SprintRemote.OnServerEvent:Connect(function(player,info))
       if tostring(info) == "EndSprint" then
@@ -28,6 +29,7 @@ function CreateEvents()
   end)
   --
   local GenericEvent = Instance.new("RemoteEvent")
+  GenericEvent.Name = "GenericEvent"
   GenericEvent.Parent = EventDirectory;
   SprintRemote.OnServerEvent:Connect(function()
     print'Hello World!'
