@@ -36,6 +36,7 @@ local ScriptTypes = {
 	["module"] = "ModuleScript";
 	["mod"] = "ModuleScript";
 	["loc"] = "LocalScript";
+	["lua"] = "Script"
 }
 
 local function UrlDecode(Character)
