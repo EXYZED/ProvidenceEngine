@@ -9,3 +9,5 @@ Issuer, A:      XLNS_XYZ Danté#9120
 Privilege:      Y
 
 ]]
+
+local ScriptTypes
