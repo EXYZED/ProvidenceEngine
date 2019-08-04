@@ -32,7 +32,7 @@ function Module:CreateEvents()
   local GenericEvent = Instance.new("RemoteEvent")
   GenericEvent.Name = "GenericExampleEvent"
   GenericEvent.Parent = EventDirectory;
-  SprintRemote.OnServerEvent:Connect(function()
+  GenericEvent.OnServerEvent:Connect(function()
     print'Hello World!'
   end)
   --
