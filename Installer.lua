@@ -2,7 +2,7 @@
 -- @see Validark
 -- function GitHub:Install(Link, Parent)
 --		@returns <Folder/LuaSourceContainer> from Link found starting at Link into Parent
---	local h = game:GetService("HttpService") local e = h.HttpEnabled h.HttpEnabled = true loadstring(h:GetAsync("https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/Installer.lua"))(e); 
+--	local h = game:GetService("HttpService") local e = h.HttpEnabled h.HttpEnabled = true loadstring(h:GetAsync("https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/Installer.lua"))(e);
 local function GetFirstChild(Parent, Name, Class)
 	if Parent then -- GetFirstChildWithNameOfClass
 		local Objects = Parent:GetChildren()
@@ -268,7 +268,8 @@ function GitHub:Install(Link, Parent, RoutineList)
 end
 
 GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/", game:GetService("ServerScriptService"))
-local Installer = game.ServerScriptService:WaitForChild("Providence"):WaitForChild("Installer")
+wait(5)
+local Installer = game.ServerScriptService:WaitForChild("Providence"):FindFirstChild("Installer")
 if Installer then
 	Installer:Destroy();
 end
