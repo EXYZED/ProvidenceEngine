@@ -1,7 +1,7 @@
 --Variables--
 text = ""
 timeUntilReset = 0.3
-MainRemote = game:GetService("ReplicatedStorage"):WaitForChild("KeyDownRemotes"):WaitForChild("SprinterRemote")
+MainRemote = game:GetService("ReplicatedStorage"):WaitForChild("EventFolder"):WaitForChild("SprinterRemote")
 --------------
 
 game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
