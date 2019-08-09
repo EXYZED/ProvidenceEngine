@@ -1,4 +1,7 @@
-
+--[[
+This event does not work as expected in solo mode, because the player is created before scripts
+ that connect to PlayerAdded run in Studio, re-try a few times.
+]]
 --- Global Variables  ---
 local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.PublicModules:WaitForChild'CreateEvents');
 local Version = 'e.10.01'
