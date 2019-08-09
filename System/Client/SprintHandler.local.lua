@@ -13,13 +13,13 @@ Privilege:      HIGH Y
 
 --Variables--
 local Debounce = false
-local timeUntilReset = 0.3
-local MainRemote = game:GetService("ReplicatedStorage"):WaitForChild'Providence':WaitForChild("EventFolder"):WaitForChild("SprinterRemote")
+local timeUntilReset = 0.4 -- Duration of subsequent W presses to trigger sprinting.
+local MainRemote = game:GetService('ReplicatedStorage'):WaitForChild'Providence':WaitForChild('EventFolder'):WaitForChild('SprinterRemote')
 --------------
 
-game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
+game:GetService('UserInputService').InputBegan:Connect(function(input, processed)
    if input.KeyCode == Enum.KeyCode.LeftShift then
-        MainRemote:FireServer("StartSprint")
+        MainRemote:FireServer('StartSprint')
     end
 
     if input.KeyCode == Enum.KeyCode.W then
@@ -31,13 +31,13 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, processed
             end)
         else
             Debounce = false
-            MainRemote:FireServer("StartSprint")
+            MainRemote:FireServer('StartSprint')
         end
     end
 end)
 
 game:GetService('UserInputService').InputEnded:Connect(function(input, gameProcessed)
     if (input.KeyCode == Enum.KeyCode.W) or (input.KeyCode == Enum.KeyCode.LeftShift) then
-        MainRemote:FireServer("EndSprint")
+        MainRemote:FireServer('EndSprint')
     end
 end)
