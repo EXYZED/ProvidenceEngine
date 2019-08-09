@@ -37,10 +37,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, processed
 end)
 
 game:GetService('UserInputService').InputEnded:Connect(function(input, gameProcessed)
-     if input.KeyCode == Enum.KeyCode.W then
-        MainRemote:FireServer("EndSprint")
-    end
-    if input.KeyCode == Enum.KeyCode.LeftShift then
+    if (input.KeyCode == Enum.KeyCode.W) or (input.KeyCode == Enum.KeyCode.LeftShift) then
         MainRemote:FireServer("EndSprint")
     end
 end)
