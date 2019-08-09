@@ -2,7 +2,7 @@
 
 
 File:           Installer.lua ()
-Description:    Loads the ProvidenceEngine
+Description:    Loads the ProvidenceEngine for whitelisted games only.
 
 Pre-requisites: PROTECTION & PROLIFERATION
 
