@@ -1,0 +1,11 @@
+{
+	"ServerSettings": {
+		"Experimental": true,
+		"DayChangeRatePS": 60,
+		"ServerMaintenance": false
+	},
+	"Interactivity": {
+		"ExchangeRate": 1
+	},
+	"Blacklist": ["Builderman", "ROBLOX"]
+}
