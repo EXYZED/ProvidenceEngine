@@ -1,6 +1,6 @@
 
 --- Global Variables ---
-local EventsModule = require(game:GetService('ReplicatedStorage'):WaitForChild('CreateEvents'))
+local EventsModule = require(game:GetService('ReplicatedStorage').Modules:WaitForChild('CreateEvents'))
 EventsModule.CreateEvents()
 local Players = game:GetService("Players")
 local System = script.Parent
