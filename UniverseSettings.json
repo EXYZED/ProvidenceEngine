@@ -5,7 +5,8 @@
 		"ServerMaintenance": false
 	},
 	"Interactivity": {
-		"ExchangeRate": 1
+		"ExchangeRate": 1,
+		"PlayerSprintSpeed": 25
 	},
 	"Blacklist": ["Builderman", "ROBLOX"]
 }
