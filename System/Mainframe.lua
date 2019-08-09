@@ -1,6 +1,6 @@
 
 --- Global Variables  ---
-local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.Modules:WaitForChild'CreateEvents')
+local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.PublicModules:WaitForChild'CreateEvents')
 EventsModule.CreateEvents()
 local Version = 'e.10.01'
 local Players = game:GetService("Players")
