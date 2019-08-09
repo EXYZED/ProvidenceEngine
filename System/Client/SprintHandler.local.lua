@@ -1,7 +1,20 @@
+--[[
+
+
+File:           SprintHandler.lua (LocalScript)
+Description:    Added running functionality, Double tap W and Shift Run.
+
+Pre-requisites: FE-Compatability, Efficient.
+
+Issuer, A:      XLNS_XYZ Danté#9120
+Privilege:      HIGH Y
+
+]]
+
 --Variables--
-text = ""
-timeUntilReset = 0.3
-MainRemote = game:GetService("ReplicatedStorage"):WaitForChild'Providence':WaitForChild("EventFolder"):WaitForChild("SprinterRemote")
+local Debounce = false
+local timeUntilReset = 0.3
+local MainRemote = game:GetService("ReplicatedStorage"):WaitForChild'Providence':WaitForChild("EventFolder"):WaitForChild("SprinterRemote")
 --------------
 
 game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
@@ -10,14 +23,14 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, processed
     end
 
     if input.KeyCode == Enum.KeyCode.W then
-        if text == "" then
-            text = "w"
+        if Debounce == false then
+            Debounce = true
             spawn(function()
                 wait(timeUntilReset)
-                text = ""
+                Debounce = false
             end)
         else
-            text = ""
+            Debounce = false
             MainRemote:FireServer("StartSprint")
         end
     end
