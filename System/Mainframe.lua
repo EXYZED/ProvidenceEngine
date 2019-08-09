@@ -1,13 +1,16 @@
 
---- Global Variables ---
+--- Global Variables  ---
 local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.Modules:WaitForChild'CreateEvents')
 EventsModule.CreateEvents()
+local Version = 'e.10.01'
 local Players = game:GetService("Players")
 local System = script.Parent
   local Client = System:WaitForChild("Client")
   local Server = System:WaitForChild("Server")
 
---- Code ---
+---       Code        ---
+
+print('Providence Engine Version: '..Version)
 
 --[[
 F:	Client Manager Block
