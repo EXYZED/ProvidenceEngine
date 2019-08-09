@@ -9,10 +9,16 @@ Issuer, A:      XLNS_XYZ Danté#9120
 Privilege:      Y
 
 ]]
---Test
+
+--  Global Variables --
+local HttpService = game.GetService'HttpService'
 local EventDirectory = game:GetService'ReplicatedStorage':WaitForChild'Providence':WaitForChild'EventFolder';
-local sprintSpeed    = 25;
----
+local ModuleDirectory = game:GetService'ReplicatedStorage':WaitForChild'Providence':WaitForChild'PublicModules';
+  local Async = require(ModuleDirectory:WaitForChild'Async');
+local UniverseSettings = HttpService:JSONDecode(Async.Get("https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json"))
+
+local sprintSpeed    = UniverseSettings.Interactivity.PlayerSprintSpeed;
+-----------
 local Module = {}
 
 function Module:CreateEvents()

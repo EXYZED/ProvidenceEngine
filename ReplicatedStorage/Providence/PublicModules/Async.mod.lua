@@ -1,6 +1,6 @@
 --[[
 
-File:           GetAsync.lua (ModuleScript)
+File:           Async.lua (ModuleScript)
 Description:    Handling HTTP requests
 
 Pre-requisites: N/A?
@@ -12,7 +12,7 @@ Privilege:      N
 
 local Module = {}
 
-function Module:GetAsync(...)
+function Module:Get(...)
 	repeat until OpenGetRequests == 0 or not wait()
 	local Success, Data = pcall(HttpService.GetAsync, HttpService, ...)
 	if Success then
@@ -32,6 +32,10 @@ function Module:GetAsync(...)
 	else
 		error(Data .. (...), 0)
 	end
+end
+
+function Module:Preload(...)
+	print "WIP"
 end
 
 return Module

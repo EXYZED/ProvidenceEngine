@@ -12,7 +12,7 @@ Privilege:      HIGH Y
 ]]
 
 local ServiceState = game:GetService('HttpService').HttpEnabled
-if not ServiceState then print'Enable HTTPService'; end
+if not ServiceState then print'Enable HttpService!'; end
 local validity = false
 
 -- Loader --
