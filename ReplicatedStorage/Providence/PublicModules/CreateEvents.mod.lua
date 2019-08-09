@@ -11,12 +11,11 @@ Privilege:      Y
 ]]
 
 --  Global Variables --
-local HttpService = game.GetService'HttpService'
+local HttpService = game:GetService'HttpService'
 local EventDirectory = game:GetService'ReplicatedStorage':WaitForChild'Providence':WaitForChild'EventFolder';
 local ModuleDirectory = game:GetService'ReplicatedStorage':WaitForChild'Providence':WaitForChild'PublicModules';
   local Async = require(ModuleDirectory:WaitForChild'Async');
 local UniverseSettings = HttpService:JSONDecode(Async.Get("https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json"))
-
 local sprintSpeed    = UniverseSettings.Interactivity.PlayerSprintSpeed;
 -----------
 local Module = {}
@@ -39,7 +38,7 @@ function Module:CreateEvents()
   GenericEvent.Name = "GenericExampleEvent"
   GenericEvent.Parent = EventDirectory;
   GenericEvent.OnServerEvent:Connect(function()
-    print'Hello World!'
+    --print'Hello World!'
   end)
   --
 

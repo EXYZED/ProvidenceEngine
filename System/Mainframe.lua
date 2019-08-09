@@ -1,7 +1,6 @@
 
 --- Global Variables  ---
-local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.PublicModules:WaitForChild'CreateEvents')
-EventsModule.CreateEvents()
+local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.PublicModules:WaitForChild'CreateEvents');
 local Version = 'e.10.01'
 local Players = game:GetService("Players")
 local System = script.Parent
@@ -29,6 +28,7 @@ Players.PlayerAdded:Connect(function(Player)
   ScriptFolder.Parent = Player.PlayerGui
 end)
 
+EventsModule.CreateEvents()
 --[[
 F:	RemoveHandler
 D:	Placeholder.

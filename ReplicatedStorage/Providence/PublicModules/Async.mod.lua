@@ -13,6 +13,7 @@ Privilege:      N
 local Module = {}
 
 function Module:Get(...)
+	local OpenGetRequests = 0
 	repeat until OpenGetRequests == 0 or not wait()
 	local Success, Data = pcall(HttpService.GetAsync, HttpService, ...)
 	if Success then
@@ -23,7 +24,7 @@ function Module:Get(...)
 		return GetAsync(...)
 	elseif Data:find("Http requests are not enabled") then
 		OpenGetRequests = OpenGetRequests + 1
-		require(script.Parent.UI):CreateSnackbar(Data)
+		--require(script.Parent.UI):CreateSnackbar(Data)
 		repeat
 			local Success, Data = pcall(HttpService.GetAsync, HttpService, ...)
 		until Success and not Data:find("Http requests are not enabled") or require(script.Parent.UI):CreateSnackbar(Data) or not wait(1)
