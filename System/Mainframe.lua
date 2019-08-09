@@ -1,18 +1,25 @@
---[[
-This event does not work as expected in solo mode, because the player is created before scripts
- that connect to PlayerAdded run in Studio, re-try a few times.
-]]
---- Global Variables  ---
-local EventsModule = require(game:GetService'ReplicatedStorage':WaitForChild'Providence'.PublicModules:WaitForChild'CreateEvents');
 local Version = 'e.10.01'
-local Players = game:GetService("Players")
-local System = script.Parent
-  local Client = System:WaitForChild("Client")
-  local Server = System:WaitForChild("Server")
 
----       Code        ---
+---  Game Services  	---
+local HttpService 		= game:GetService('HttpService')
+local Players 			= game:GetService("Players")
 
-print('Providence Engine Version: '..Version)
+--- Global Variables 	---
+local ModuleDirectory 	= game:GetService'ReplicatedStorage':WaitForChild'Providence':WaitForChild'PublicModules';
+local EventsModule 		= require(ModuleDirectory:WaitForChild'CreateEvents');
+local Async 			= require(ModuleDirectory:WaitForChild'Async');
+
+local UniverseSettings = HttpService:JSONDecode(Async.Get("https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json"))
+
+--- Local Variables		---
+local System 			= script.Parent
+  local Client 			= System:WaitForChild("Client")
+  local Server 			= System:WaitForChild("Server")
+
+local Blacklist			= UniverseSettings.Blacklist
+---       Code      	---
+
+print('Providence Engine Version: '..Version..', Running on '.. _VERSION)
 
 --[[
 F:	Client Manager Block
@@ -20,15 +27,22 @@ D:	Create a folder to store all client scripts and parent to individiual PlayerG
 	PlayerGui Must NOT reset for this to work.
 ]]
 Players.PlayerAdded:Connect(function(Player)
-  local ScriptFolder = Instance.new('Folder')
-  ScriptFolder.Name = 'ClientScripts'
+	print(Player.Name..' joined the game')
+	for index, child in ipairs(Blacklist) do
+  		if Player.Name == tostring(child) then
+		Players.Player:Kick("You have been blacklisted.")
+		end
+  	end
 
-  for i, child in ipairs(Client:GetChildren()) do
-  	local Script = child:Clone()
-    Script.Parent = ScriptFolder
-  end
+  	local ScriptFolder = Instance.new('Folder')
+  	ScriptFolder.Name = 'ClientScripts'
 
-  ScriptFolder.Parent = Player.PlayerGui
+  	for i, child in ipairs(Client:GetChildren()) do
+  		local Script = child:Clone()
+   		Script.Parent = ScriptFolder
+  	end
+
+  	ScriptFolder.Parent = Player.PlayerGui
 end)
 
 EventsModule.CreateEvents()
