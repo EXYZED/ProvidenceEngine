@@ -10,3 +10,11 @@ Issuer, A:      XLNS_XYZ Danté#9120
 Privilege:      Y
 
 ]]
+
+Lighting = game:GetService("Lighting")
+
+while true do
+	wait(1)
+	T = Lighting:GetMinutesAfterMidnight(T + 1)
+	Lighting:SetMinutesAfterMidnight(T + 1)
+end
