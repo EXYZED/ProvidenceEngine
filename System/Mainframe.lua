@@ -39,7 +39,7 @@ F:	Client Manager Block
 D:	Create a folder to store all client scripts and parent to individiual PlayerGui.
 	PlayerGui Must NOT reset for this to work.
 ]]
-Players.PlayerAdded:Connect(function(Player)
+function OnPlayerAdded(Player)
 	print(Player.Name..' joined the game')
 	for index, child in ipairs(Blacklist) do
   		if Player.Name == tostring(child) then
@@ -56,7 +56,14 @@ Players.PlayerAdded:Connect(function(Player)
   	end
 
   	ScriptFolder.Parent = Player.PlayerGui
-end)
+end
+
+Players.PlayerAdded:Connect(OnPlayerAdded)
+for _, Player in ipairs(Players:GetPlayers()) do
+     OnPlayerAdded(Player)
+end
+Players.PlayerAdded:Connect(OnPlayerAdded)
+	
 
 EventsModule.CreateEvents()
 --[[
