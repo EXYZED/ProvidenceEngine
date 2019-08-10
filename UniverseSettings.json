@@ -6,6 +6,7 @@
 	},
 	"Interactivity": {
 		"ExchangeRate": 1,
+		"StarterMoney": 1000,
 		"PlayerSprintSpeed": 25
 	},
 	"Blacklist": ["Builderman", "ROBLOX"]
