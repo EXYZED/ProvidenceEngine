@@ -12,9 +12,11 @@ Privilege:      Y
 ]]
 
 Lighting = game:GetService("Lighting")
-
+--[[ Broken Script
 while true do
 	wait(1)
 	T = Lighting:GetMinutesAfterMidnight(T + 1)
 	Lighting:SetMinutesAfterMidnight(T + 1)
 end
+
+]]
