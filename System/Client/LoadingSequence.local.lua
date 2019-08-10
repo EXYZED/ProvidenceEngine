@@ -53,7 +53,7 @@ function SCRIPT_GEZU75_FAKESCRIPT() -- LoadingCircle.CircleAnimator
 				Cols = 7,
 				Count = 54,
 				Resolution = Vector2.new(1024/8,1024/8),
-				FPS = 40
+				FPS = 30
 			}
 		},
 		Loops = 1/0
