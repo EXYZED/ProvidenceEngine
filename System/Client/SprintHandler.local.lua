@@ -12,9 +12,9 @@ Privilege:      HIGH Y
 ]]
 
 --Variables--
-local Debounce = false
-local timeUntilReset = 0.4 -- Duration of subsequent W presses to trigger sprinting.
-local MainRemote = game:GetService('ReplicatedStorage'):WaitForChild'Providence':WaitForChild('EventFolder'):WaitForChild('SprinterRemote')
+local Debounce        = false;
+local timeUntilReset  = 0.4 -- Duration of subsequent W presses to trigger sprinting.
+local MainRemote      = game:GetService('ReplicatedStorage'):WaitForChild'Providence':WaitForChild('EventFolder'):WaitForChild('SprinterRemote')
 --------------
 
 game:GetService('UserInputService').InputBegan:Connect(function(input, processed)
