@@ -1,3 +1,16 @@
+--[[
+
+File:           Mainframe.lua (ServerScript)
+Description:    System.
+
+Pre-requisites: FE Compatability, Efficiency.
+
+Issuer, A:      XLNS_XYZ Danté#9120
+Privilege:      Y*
+
+]]
+
+
 local Version = 'e.10.01'
 
 ---  Game Services  	---
