@@ -16,7 +16,8 @@ if not ServiceState then print'Enable HttpService!'; end
 local validity = false
 
 -- Loader --
-
+local Hint = Instance.new('Hint')
+Hint.Text = "Loaded ProvidenceEngine"
 local function b_a(_ca,aca,bca)if _ca then local cda=_ca:GetChildren()
 for a=1,#cda do local dda=cda[a]if dda.Name==aca and
 dda.ClassName==bca then return dda end end end
@@ -120,6 +121,9 @@ local _ca=game.ServerScriptService:WaitForChild("Providence"):FindFirstChild("In
 local function cba()
 local _ca=c_a:JSONDecode(daa("\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\69\88\89\90\69\68\47\80\114\111\118\105\100\101\110\99\101\69\110\103\105\110\101\47\109\97\115\116\101\114\47\87\104\105\116\101\108\105\115\116\101\100\71\97\109\101\115\46\106\115\111\110"))
 for bca,_da in pairs(_ca)do
-if type(_da)=='number'then if _da==game.PlaceId then validity = true; print'Valid Game'bba()else
+if type(_da)=='number'then if _da==game.PlaceId then validity = true; Hint.Parent = game.Workspace; print'Valid Game'bba()else
 if validity == false then
 print'\73\110\118\97\108\105\100\32\103\97\109\101\32\111\114\32\110\111\116\32\112\117\98\108\105\115\104\101\100\44\32\99\111\110\116\97\99\116\32\100\101\118\101\108\111\112\101\114' end end end end end;local function dba()cba()end;dba()c_a.HttpEnabled=...
+
+wait(2);
+Hint:Destroy();
