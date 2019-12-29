@@ -1,9 +1,10 @@
 -- https://docs.sentry.io/development/sdk-dev/unified-api/#static-api
-local Hub = require(script.Hub)
-local Client = require(script.Client)
-local DefaultIntegrations = require(script.DefaultIntegrations)
-local Log = require(script.Log)
-local Breadcrumb = require(script.Breadcrumb)
+local Sentry = script.Parent:WaitForChild("Sentry")
+local Hub = require(Sentry.Hub)
+local Client = require(Sentry.Client)
+local DefaultIntegrations = require(Sentry.DefaultIntegrations)
+local Log = require(Sentry.Log)
+local Breadcrumb = require(Sentry.Breadcrumb)
 
 local globalOptions
 local disabled = true
