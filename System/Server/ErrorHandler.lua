@@ -18,5 +18,11 @@ Sentry.init({
 	dsn = "https://d243e16260d1406f96f88a8b133a9857@sentry.io/1868233"
 })
 
-Sentry.captureException(debug.traceback("Error - ByronBay"))
---Sentry.captureMessage("Message from Byron Bay", Sentry.Level.Info)
+game:GetService("LogService").MessageOut:Connect(function(Message, Type)
+	if Type == Enum.MessageType.MessageError then
+		Sentry.captureMessage(Message, Sentry.Level.Error)
+	end
+	if Type == Enum.MessageType.MessageWarning then
+		Sentry.captureMessage(Message, Sentry.Level.Warning)
+	end
+end)

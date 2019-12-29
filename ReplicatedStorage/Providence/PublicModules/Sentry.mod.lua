@@ -1,5 +1,5 @@
 -- https://docs.sentry.io/development/sdk-dev/unified-api/#static-api
-local Sentry = script.Parent:WaitForChild("SentryF")
+local SentryF = script.Parent:WaitForChild("SentryF")
 local Hub = require(SentryF.Hub)
 local Client = require(SentryF.Client)
 local DefaultIntegrations = require(SentryF.DefaultIntegrations)

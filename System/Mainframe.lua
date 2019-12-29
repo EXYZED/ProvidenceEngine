@@ -11,7 +11,8 @@ Privilege:      Y*
 ]]
 
 
-local Version = 'e.10.01'
+local Version = 'e.10.03'
+-- Syntax for version 'Status.Counter.SubCounter' where for Status [e:exprimntl,s:stable]
 
 ---  Game Services  	---
 local HttpService 		= game:GetService('HttpService')
@@ -63,7 +64,7 @@ for _, Player in ipairs(Players:GetPlayers()) do
      OnPlayerAdded(Player)
 end
 Players.PlayerAdded:Connect(OnPlayerAdded)
-	
+
 
 EventsModule.CreateEvents()
 --[[
