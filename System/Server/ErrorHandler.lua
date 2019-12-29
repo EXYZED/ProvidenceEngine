@@ -18,4 +18,5 @@ Sentry.init({
 	dsn = "https://d243e16260d1406f96f88a8b133a9857@sentry.io/1868233"
 })
 
-Sentry.captureMessage("Message from Byron Bay", Sentry.Level.Info)
+Sentry.captureException(debug.traceback("Error - ByronBay"))
+--Sentry.captureMessage("Message from Byron Bay", Sentry.Level.Info)
