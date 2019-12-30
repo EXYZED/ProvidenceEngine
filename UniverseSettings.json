@@ -1,12 +1,30 @@
 {
 	"ServerSettings": {
+		"ServerVersion": "e.10.01",
 		"Experimental": true,
 		"DayChangeRatePS": 60,
 		"ServerMaintenance": false
 	},
+	"Scenery": {
+		"NightClockTime": 19,
+		"DayClockTime": 7,
+		"RoadlightBrightness": 0.9,
+		"RoadlightRange": 20,
+		"OutdoorAmbient": "rbxassetid://172886049",
+		"OAVolume": 0.4
+	},
+	"Jobs": {
+		"MinimumWage": 1,
+		"KFC": 1000,
+		"MCDonalds": 17,
+		"PlayerSprintSpeed": 25
+	},
 	"Interactivity": {
+		"UniversalBasicIncome": 10,
 		"ExchangeRate": 1,
+		"ExponentialIncentive": 1.01,
 		"StarterMoney": 1000,
+		"PlayerWalkSpeed": 17,
 		"PlayerSprintSpeed": 25
 	},
 	"Blacklist": ["Builderman", "ROBLOX"]

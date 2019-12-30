@@ -11,15 +11,18 @@ Privilege:      Y*
 ]]
 
 
-local Version = 'e.10.03'
--- Syntax for version 'Status.Counter.SubCounter' where for Status [e:exprimntl,s:stable]
+local Version = 'e.10.01'
 
 ---  Game Services  	---
 local HttpService 		= game:GetService('HttpService')
 local Players 			= game:GetService("Players")
 
 --- Global Variables 	---
-local ModuleDirectory 	= game:GetService'ReplicatedStorage':WaitForChild'Providence':WaitForChild'PublicModules';
+local ProvidenceStorage	= game:GetService("ReplicatedStorage"):WaitForChild("Providence");
+local UniverseSettings	= ProvidenceStorage:WaitForChild("UniverseSettings");
+local ModuleDirectory 	= ProvidenceStorage:WaitForChild("PublicModules");
+
+local Initializer		= require(UniverseSettings:WaitForChild("ModuleScript"))
 local EventsModule 		= require(ModuleDirectory:WaitForChild'CreateEvents');
 local Async 			= require(ModuleDirectory:WaitForChild'Async');
 
@@ -67,6 +70,12 @@ Players.PlayerAdded:Connect(OnPlayerAdded)
 
 
 EventsModule.CreateEvents()
+
+--[[
+F:	UniverseSettingsInitialiser
+D:	Initalise universe settings
+]]
+Initializer.Start()
 --[[
 F:	RemoveHandler
 D:	Placeholder.
