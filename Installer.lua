@@ -301,7 +301,7 @@ local function WhitelistCheck()
 	for k, v in pairs(Whitelist) do
 		if type(v) == 'number' then
 			if v == game.PlaceId then
-        print(v .. 'Valid game entity.')
+        print(v .. ' Valid game entity.')
         Status = true
 			end
 		end
@@ -311,7 +311,7 @@ local function WhitelistCheck()
       print'Valid game'
     	InstallE()
     else
-      print'Invalid game'
+      print'Invalid game, Contact XLNS_XYZ'
   end
 end
 

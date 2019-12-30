@@ -59,6 +59,6 @@ function Initalize.Start()
 			end
 		end
 	end
-end
 
+end -- end func
 return Initalize
