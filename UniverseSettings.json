@@ -2,10 +2,10 @@
 	"ServerSettings": {
 		"ServerVersion": "e.10.01",
 		"Experimental": true,
-		"DayChangeRatePS": 60,
 		"ServerMaintenance": false
 	},
 	"Scenery": {
+		"CycleTime": 550,
 		"NightClockTime": 19,
 		"DayClockTime": 7,
 		"RoadlightBrightness": 0.9,

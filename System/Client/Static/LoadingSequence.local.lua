@@ -19,7 +19,7 @@ local LoadingUI = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local LoadingCircle = Instance.new("Frame")
 --Properties:
-LoadingUI.enabled = false
+LoadingUI.Enabled = false
 LoadingUI.Name = "LoadingUI"
 LoadingUI.Parent = Player.PlayerGui
 LoadingUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
