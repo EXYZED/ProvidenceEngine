@@ -7,24 +7,8 @@ function Initalize.Start()
 	local JSONString;
 	local data;
 	local Version				= 0
-
-	------- PCall block
-	local function GetRawData()
-		local success, request = pcall(function()
-		    return HTTPService:GetAsync('https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json')
-		end)
-		if success then
-		    --print("[ProvidenceEngine] : UniverseSettings Synced")
-		    JSONString = request
-		else
-		    --error("[ProvidenceEngine] : Issue with UniverseSettings, check HTTPService?")
-		end
-	end
-
-	GetRawData()
 	-------
-
-	local function InstanceHandler(name,object,parent)
+		local function InstanceHandler(name,object,parent)
 		if tostring(type(object)) == 'table' then
 			local Replicant = Instance.new('Folder')
 			Replicant.Name = name
@@ -83,13 +67,28 @@ function Initalize.Start()
 			end
 		end
 	end
-
-	if JSONString then
-		data = HTTPService:JSONDecode(JSONString)
-		if CheckVersion() then UpdateValues() end
+	------- PCall block
+	local function GetRawData()
+		local success, request = pcall(function()
+		    return HTTPService:GetAsync('https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json')
+		end)
+		if success then
+		    --print("[ProvidenceEngine] : UniverseSettings Synced")
+		    JSONString = request
+		else
+		    error("[ProvidenceEngine] : Issue with UniverseSettings, check HTTPService?")
+		end
+		if JSONString then
+			data = HTTPService:JSONDecode(JSONString)
+			if CheckVersion() then UpdateValues() end
+		end
 	end
 
-	while script do wait(30)
+	GetRawData()
+	-------
+
+
+	while script do wait(5)
 		GetRawData()
 		if CheckVersion() then UpdateValues() end
 	end
