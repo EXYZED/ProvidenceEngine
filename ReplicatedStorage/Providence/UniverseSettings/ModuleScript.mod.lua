@@ -54,7 +54,7 @@ function Initalize.Start()
 
 
 
-	local function CheckVersion
+	local function CheckVersion()
 		if data.ServerSettings.ServerVersion ~= Version then
 			Version = data.ServerSettings.ServerVersion
 			return true
@@ -63,7 +63,7 @@ function Initalize.Start()
 		end
 	end
 
-	local function UpdateValues
+	local function UpdateValues()
 		for k,v in pairs(data) do
 			InstanceHandler(k,v,script.Parent)
 
