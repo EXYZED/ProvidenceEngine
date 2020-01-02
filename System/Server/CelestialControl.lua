@@ -11,15 +11,15 @@ Privilege:      Y
 
 ]]
 
-local TweenService = game:GetService("TweenService")
+local TweenService 				= game:GetService("TweenService")
 
-local UniverseSettings = game:GetService('ReplicatedStorage').Providence:WaitForChild('UniverseSettings')
-local SceneryValues = UniverseSettings:WaitForChild('Scenery')
-local CycleTime = SceneryValues.CycleTime.Value
+local UniverseSettings 		= game:GetService('ReplicatedStorage').Providence:WaitForChild('UniverseSettings')
+local SceneryDirectory		= UniverseSettings:WaitForChild('Scenery')
+local CycleTime 					= SceneryDirectory.CycleTime.Value
+local RandomStartTime 		= math.random(7, 16)
 
 --
-local RandomStartTime = math.random(7, 16)
-game.Lighting.ClockTime = RandomStartTime
+game.Lighting.ClockTime 	= RandomStartTime
 
 local LightGoal = {}
 LightGoal.ClockTime = 24

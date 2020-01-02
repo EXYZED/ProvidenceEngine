@@ -5,7 +5,7 @@
 		"ServerMaintenance": false
 	},
 	"Scenery": {
-		"CycleTime": 550,
+		"CycleTime": 1000,
 		"NightClockTime": 19,
 		"DayClockTime": 7,
 		"RoadlightBrightness": 0.9,
@@ -15,12 +15,18 @@
 	},
 	"Jobs": {
 		"MinimumWage": 1,
-		"KFC": 1000,
-		"MCDonalds": 17,
-		"PlayerSprintSpeed": 25
+		"TowingWage": 1000,
+		"MCDonalds": 17
+	},
+	"Events": {
+		"ProbabilityFire": 0.004,
+		"ProbabilityPowerCut": 0.001,
+		"ProbabilityRain": 0.002,
+		"ProbabilityStorm": 0.0005
 	},
 	"Interactivity": {
 		"UniversalBasicIncome": 10,
+		"WSDebounceTime": 0.4,
 		"ExchangeRate": 1,
 		"ExponentialIncentive": 1.01,
 		"StarterMoney": 1000,

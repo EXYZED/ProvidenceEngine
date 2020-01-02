@@ -12,10 +12,18 @@ Privilege:      HIGH Y
 ]]
 
 --Variables--
+
+
+local UniverseSettings 		= game:GetService('ReplicatedStorage').Providence:WaitForChild('UniverseSettings')
+local InteractivityDir		= UniverseSettings:WaitForChild('Interactivity')
+local DebounceTime 				= InteractivityDir.WSDebounceTime.Value
+
 local Debounce        = false;
-local timeUntilReset  = 0.4 -- Duration of subsequent W presses to trigger sprinting.
+local timeUntilReset  = DebounceTime -- Duration of subsequent W presses to trigger sprinting.
 local MainRemote      = game:GetService('ReplicatedStorage'):WaitForChild'Providence':WaitForChild('EventFolder'):WaitForChild('SprinterRemote')
 --------------
+
+MainRemote:FireServer('EndSprint') -- Initalise default values
 
 game:GetService('UserInputService').InputBegan:Connect(function(input, processed)
    if input.KeyCode == Enum.KeyCode.LeftShift then
