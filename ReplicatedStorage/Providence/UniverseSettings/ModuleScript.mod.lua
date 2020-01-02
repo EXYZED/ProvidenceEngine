@@ -64,6 +64,13 @@ function Initalize.Start()
 	end
 
 	local function UpdateValues()
+
+		for index, object in ipairs (script.Parent:GetChildren()) do -- Clear old values
+			if not(object:IsA('BaseScript') or object:IsA('ModuleScript')) then
+				object:Destroy();
+			end
+		end
+
 		for k,v in pairs(data) do
 			InstanceHandler(k,v,script.Parent)
 
