@@ -9,17 +9,19 @@ function Initalize.Start()
 	local Version				= 0
 
 	------- PCall block
-
-	local success, request = pcall(function ()
-	    return HTTPService:GetAsync('https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json')
-	end)
-	if success then
-	    print("[ProvidenceEngine] : UniverseSettings Synced")
-	    JSONString = request
-	else
-	    error("[ProvidenceEngine] : Issue with UniverseSettings, check HTTPService?")
+	local function GetRawData()
+		local success, request = pcall(function()
+		    return HTTPService:GetAsync('https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/UniverseSettings.json')
+		end)
+		if success then
+		    --print("[ProvidenceEngine] : UniverseSettings Synced")
+		    JSONString = request
+		else
+		    --error("[ProvidenceEngine] : Issue with UniverseSettings, check HTTPService?")
+		end
 	end
 
+	GetRawData()
 	-------
 
 	local function InstanceHandler(name,object,parent)
@@ -57,6 +59,7 @@ function Initalize.Start()
 	local function CheckVersion()
 		if data.ServerSettings.ServerVersion ~= Version then
 			Version = data.ServerSettings.ServerVersion
+			print("[ProvidenceEngine] : UniverseSettings Updated / Initalized Version: "..Version)
 			return true
 		else
 			return false
@@ -86,7 +89,8 @@ function Initalize.Start()
 		if CheckVersion() then UpdateValues() end
 	end
 
-	while script do wait(100)
+	while script do wait(30)
+		GetRawData()
 		if CheckVersion() then UpdateValues() end
 	end
 
