@@ -5,6 +5,9 @@ local Initalize = {}
 function Initalize.Start()
 
 	local JSONString;
+	local data;
+	local Version				= 0
+
 	------- PCall block
 
 	local success, request = pcall(function ()
@@ -47,9 +50,20 @@ function Initalize.Start()
 			Replicant.Parent = parent
 		end
 	end
+	---
 
-	if JSONString then
-		local data = HTTPService:JSONDecode(JSONString)
+
+
+	local function CheckVersion
+		if data.ServerSettings.ServerVersion ~= Version then
+			Version = data.ServerSettings.ServerVersion
+			return true
+		else
+			return false
+		end
+	end
+
+	local function UpdateValues
 		for k,v in pairs(data) do
 			InstanceHandler(k,v,script.Parent)
 
@@ -58,6 +72,15 @@ function Initalize.Start()
 
 			end
 		end
+	end
+
+	if JSONString then
+		data = HTTPService:JSONDecode(JSONString)
+		if CheckVersion() then UpdateValues() end
+	end
+
+	while script do wait(100)
+		if CheckVersion() then UpdateValues() end
 	end
 
 end -- end func
