@@ -26,7 +26,7 @@
 	},
 	"Interactivity": {
 		"UniversalBasicIncome": 10,
-		"WSDebounceTime": 0.4,
+		"WSDebounceTime": 0.2,
 		"ExchangeRate": 1,
 		"ExponentialIncentive": 1.01,
 		"StarterMoney": 1000,
