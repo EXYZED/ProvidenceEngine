@@ -90,7 +90,7 @@ function Initalize.Start()
 
 	while script do wait(5)
 		GetRawData()
-		if CheckVersion() then UpdateValues() end
+		--if CheckVersion() then UpdateValues() end
 	end
 
 end -- end func
