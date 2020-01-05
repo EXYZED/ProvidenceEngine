@@ -22,6 +22,7 @@
 		"ProbabilityFire": 0.004,
 		"ProbabilityPowerCut": 0.001,
 		"ProbabilityRain": 0.002,
+		"ProbabilityAsteroid": 0.000000001,
 		"ProbabilityStorm": 0.0005
 	},
 	"Interactivity": {
