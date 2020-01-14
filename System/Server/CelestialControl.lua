@@ -25,7 +25,7 @@ local LightGoal = {}
 LightGoal.ClockTime = 24
 local LightStyle = TweenInfo.new(CycleTime*(RandomStartTime/24), Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
 TweenService:Create(game.Lighting, LightStyle, LightGoal):Play()
-delay(tick(), function()
+delay(0.000001, function()
 	game.Lighting.ClockTime = 0
 	local LightGoal = {}
 	LightGoal.ClockTime = 24
