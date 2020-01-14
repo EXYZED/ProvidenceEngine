@@ -11,7 +11,8 @@
 		"RoadlightBrightness": 0.9,
 		"RoadlightRange": 20,
 		"OutdoorAmbient": "rbxassetid://172886049",
-		"OAVolume": 0.4
+		"ByronBayLogo": "rbxassetid://123456789",
+		"OAVolume": 0.4,
 	},
 	"Jobs": {
 		"MinimumWage": 1,
@@ -23,7 +24,11 @@
 		"ProbabilityPowerCut": 0.001,
 		"ProbabilityRain": 0.002,
 		"ProbabilityAsteroid": 0.000000001,
-		"ProbabilityStorm": 0.0005
+		"ProbabilityStorm": 0.0005,
+		"NewYear" :	0,
+		"AustraliaDay": 19,
+		"Halloween": 305,
+		"Christmas": 359
 	},
 	"Interactivity": {
 		"UniversalBasicIncome": 10,
@@ -34,5 +39,5 @@
 		"PlayerWalkSpeed": 17,
 		"PlayerSprintSpeed": 25
 	},
-	"Blacklist": ["Builderman", "ROBLOX"]
+	"Blacklist": ["PhillipWindsor","Builderman", "ROBLOX"]
 }
