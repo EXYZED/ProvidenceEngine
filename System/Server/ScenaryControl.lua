@@ -64,7 +64,7 @@ local function Runtime()
   while true do local StartT = tick() ; wait((tick() - StartT)*1.5e6); -- Variable timing, lag reduction
 
     Counter01 = (Counter01 + 1)
-    if Counter01 = 10 then  -- Reduce the number of operations, Check time for every 10 generic ticks - lag reduction
+    if Counter01 == 10 then  -- Reduce the number of operations, Check time for every 10 generic ticks - lag reduction
       if CheckGameTime() == 'Night' then
         RunLights(true)
       elseif CheckGameTime() == 'Day' then
@@ -81,6 +81,3 @@ end
 function RainEvent()
 
 end
-
-
-  local StartT = tick(); print((tick() - StartT))
