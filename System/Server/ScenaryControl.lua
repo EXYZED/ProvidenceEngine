@@ -30,7 +30,7 @@ end
 --
 
 local function GetStreetLights()
-  for Index, Object in ipairs do(game.Workspace:WaitForChild('Streetlights'):GetDescendents()) do
+  for Index, Object in ipairs (game.Workspace:WaitForChild('Streetlights'):GetDescendents()) do
   if (Object.Name == 'Light') and (Object.Parent == "Streetlight") then
     table.Insert(StreetLights,Object.Light)
   end
