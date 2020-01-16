@@ -37,14 +37,13 @@ local function GetStreetLights()
 end
 
 local function CheckGameTime()
-
     if (game.Lighting.ClockTime >= 0 and game.Lighting.ClockTime <= 6) or (game.Lighting.ClockTime >= 21 and game.Lighting.ClockTime <= 24)  then
-      return 'Night'
-    else
-      return 'Day'
+        return 'Night'
+      elseif not (game.Lighting.ClockTime >= 0 and game.Lighting.ClockTime <= 6) or (game.Lighting.ClockTime >= 21 and game.Lighting.ClockTime <= 24) then
+        return 'Day'
+      else
+        return false
     end
-
-  return nil
 end
 
 local function RunLights(Mode)
@@ -63,17 +62,18 @@ end
 local function Runtime()
   while true do local StartT = tick() ; wait((tick() - StartT)*1.5e6); -- Variable timing, lag reduction
 
-    Counter01 = (Counter01 + 1)
-    if Counter01 == 10 then  -- Reduce the number of operations, Check time for every 10 generic ticks - lag reduction
-      if CheckGameTime() == 'Night' then
-        RunLights(true)
-      elseif CheckGameTime() == 'Day' then
-        RunLights(false)
+      Counter01 = (Counter01 + 1)
+      if Counter01 == 10 then  -- Reduce the number of operations, Check time for every 10 generic ticks - lag reduction
+        if CheckGameTime() == 'Night' then
+          RunLights(true)
+        elseif CheckGameTime() == 'Day' then
+          RunLights(false)
+        end
       end
-    end
 
-    if RandomNumeric(0,0.09) < RainChance then
-      Rain:Enable()
+      if RandomNumeric(0,0.09) < RainChance then
+        Rain:Enable()
+      end
     end
   end
 end

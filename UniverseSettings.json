@@ -12,7 +12,7 @@
 		"RoadlightRange": 20,
 		"OutdoorAmbient": "rbxassetid://172886049",
 		"ByronBayLogo": "rbxassetid://123456789",
-		"OAVolume": 0.4,
+		"OAVolume": 0.4
 	},
 	"Jobs": {
 		"MinimumWage": 1,
