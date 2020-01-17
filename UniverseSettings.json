@@ -39,5 +39,5 @@
 		"PlayerWalkSpeed": 17,
 		"PlayerSprintSpeed": 25
 	},
-	"Blacklist": ["PhillipWindsor","Builderman", "ROBLOX"]
+	"Blacklist": ["Builderman", "ROBLOX"]
 }
