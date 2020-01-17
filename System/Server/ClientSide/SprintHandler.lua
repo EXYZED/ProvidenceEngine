@@ -22,7 +22,7 @@ local SprintRemote        = Instance.new("RemoteEvent");
       SprintRemote.Name   = "SprinterRemote";
       SprintRemote.Parent = EventDirectory;
       SprintRemote.OnServerEvent:Connect(function(player,info)
-        repeat wait() until player.Character.Humanoid
+        repeat wait() until player.Character:FindFirstChild('Humanoid')
         if tostring(info) == "EndSprint" then
             player.Character.Humanoid.WalkSpeed = StdWalkspeed
         end
