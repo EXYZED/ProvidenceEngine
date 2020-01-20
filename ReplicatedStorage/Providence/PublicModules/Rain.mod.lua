@@ -170,7 +170,7 @@ local RAIN_OCCLUDED_SPREAD = Vector2.new(10,10)				-- Spread angle for the occlu
 local RAIN_OCCLUDED_MAXINTENSITY = 2						-- How many occluded straight rain particles are emitted for every splash for max intensity
 
 local RAIN_OCCLUDECHECK_OFFSET_Y = 500						-- Vertical offset from camera height to start scanning downward from for splashes
-local RAIN_OCCLUDECHECK_OFFSET_XZ_MIN = -100				-- Range of possible XZ offset values from camera XZ position for the splashes
+local RAIN_OCCLUDECHECK_OFFSET_XZ_MIN = -900				-- Range of possible XZ offset values from camera XZ position for the splashes
 local RAIN_OCCLUDECHECK_OFFSET_XZ_MAX = 100
 local RAIN_OCCLUDECHECK_SCAN_Y = 550						-- Scan magnitude along rain path
 
