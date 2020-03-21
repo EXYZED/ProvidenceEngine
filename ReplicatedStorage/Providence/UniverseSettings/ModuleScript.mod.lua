@@ -1,3 +1,16 @@
+--[[
+
+File:           ModuleScript.lua (ServerScript)
+Description:    Will disambiguate information from the UniverseSettings.json file into ROBLOX instances as values.
+
+Pre-requisites: FE Compatability, Greatest Efficiency.
+
+Issuer, A:      XLNS_XYZ Danté#9120
+Privilege:      Y
+
+]]--
+
+
 local HTTPService = game:GetService("HttpService")
 
 local Initalize = {}
