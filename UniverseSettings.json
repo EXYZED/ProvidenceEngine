@@ -38,5 +38,5 @@
 		"PlayerWalkSpeed": 17,
 		"PlayerSprintSpeed": 25
 	},
-	"Blacklist": ["Builderman", "ROBLOX", "TZ_Tazuk"]
+	"Blacklist": ["Builderman", "ROBLOX"]
 }
