@@ -12,7 +12,7 @@
 		"RoadlightRange": 20,
 		"OutdoorAmbient": "rbxassetid://172886049",
 		"ProvidenceLogo": "rbxassetid://123456789",
-		"OAVolume": 0.4
+		"OutdoorAmbientVolume": 0.4
 	},
 	"Jobs": {
 		"MinimumWage": 1,
