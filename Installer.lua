@@ -1,24 +1,12 @@
 --[[
-
-
 File:           Installer.lua ()
 Description:    Loads the ProvidenceEngine for whitelisted games only.
-
 Pre-requisites: PROTECTION & PROLIFERATION
-
 Issuer, A:      XLNS_XYZ Danté#9120
 Privilege:      HIGH Y
-
 ]]
-
-local ServiceState = game:GetService('HttpService').HttpEnabled
-if not ServiceState then print'Enable HttpService!'; end
-local validity = false
-
--- Loader --
-local Hint = Instance.new('Hint')
-Hint.Text = "Loaded ProvidenceEngine"
-
+-- TODO: This script needs to be refactored
+-- luacheck: push ignore
 
 local function GetFirstChild(Parent, Name, Class)
 	if Parent then -- GetFirstChildWithNameOfClass
@@ -37,7 +25,6 @@ local function GetFirstChild(Parent, Name, Class)
 	return Child, true
 end
 
-
 -- Services
 local HttpService = game:GetService("HttpService")
 
@@ -48,11 +35,13 @@ local DataSources = {}
 
 -- Helper Functions
 local ScriptTypes = {
-	[""] = "Script";
+	[""] = "ModuleScript";
 	["local"] = "LocalScript";
 	["module"] = "ModuleScript";
 	["mod"] = "ModuleScript";
 	["loc"] = "LocalScript";
+	["server"] = "Script";
+	["client"] = "LocalScript";
 }
 
 local function UrlDecode(Character)
@@ -60,22 +49,31 @@ local function UrlDecode(Character)
 end
 
 local OpenGetRequests = 0
+
 local function GetAsync(...)
 	repeat until OpenGetRequests == 0 or not wait()
 	local Success, Data = pcall(HttpService.GetAsync, HttpService, ...)
+
 	if Success then
 		return Data
-	elseif Data:find("HTTP 429") or Data:find("Number of requests exceeded limit") then
+	elseif Data:find("HTTP 429", 1, true) or Data:find("Number of requests exceeded limit", 1, true) then
 		wait(math.random(5))
 		warn("Too many requests")
 		return GetAsync(...)
-	elseif Data:find("Http requests are not enabled") then
+	elseif Data:find("Http requests are not enabled", 1, true) then
 		OpenGetRequests = OpenGetRequests + 1
-		require(script.Parent.UI):CreateSnackbar(Data)
 		repeat
 			local Success, Data = pcall(HttpService.GetAsync, HttpService, ...)
-		until Success and not Data:find("Http requests are not enabled") or require(script.Parent.UI):CreateSnackbar(Data) or not wait(1)
+		until Success and not Data:find("Http requests are not enabled", 1, true) or not wait(1)
 		OpenGetRequests = 0
+		return GetAsync(...)
+	elseif Data:find("HTTP 503", 1, true) then
+		warn(Data, (...))
+		return ""
+	elseif Data:find("HttpError: SslConnectFail", 1, true) then
+		local t = math.random(2, 5)
+		warn("HttpError: SslConnectFail error on " .. tostring((...)) .. " trying again in " .. t .. " seconds.")
+		wait(t)
 		return GetAsync(...)
 	else
 		error(Data .. (...), 0)
@@ -98,26 +96,36 @@ local function InstallRepo(Link, Directory, Parent, Routines, TypesSpecified)
 	local FolderCount = 0
 	local Folders = {}
 
-	for Link in GetAsync(Link):gmatch("<tr class=\"js%-navigation%-item\">.-<a class=\"js%-navigation%-open\" title=\"[^\"]+\" id=\"[^\"]+\"%s*href=\"([^\"]+)\".-</tr>") do
-		if Link:find("/[^/]+/[^/]+/tree") then
-			FolderCount = FolderCount + 1
-			Folders[FolderCount] = Link
-		elseif Link:find("/[^/]+/[^/]+/blob.+%.lua$") then
-			local ScriptName, ScriptClass = Link:match("([%w-_%%]+)%.?(%l*)%.lua$")
+	local Data = GetAsync(Link)
+	local ShouldSkip = false
+	local _, StatsGraph = Data:find("d-flex repository-lang-stats-graph", 1, true)
 
-			if ScriptName:lower() ~= "install" then
-				if ScriptClass == "mod" or ScriptClass == "module" then TypesSpecified = true end
+	if StatsGraph then
+		ShouldSkip = Data:sub(StatsGraph + 1, (Data:find("</div>", StatsGraph, true) or 0 / 0) - 1):find("%ALua%A") == nil
+	end
 
-				if ScriptName == "_" or ScriptName:lower() == "main" then
-					ScriptCount = ScriptCount + 1
-					for a = ScriptCount, 2, -1 do
-						Scripts[a] = Scripts[a - 1]
+	if not ShouldSkip then
+		for Link in Data:gmatch("<tr class=\"js%-navigation%-item%s*\">.-<a class=\"js%-navigation%-open%s*\" title=\"[^\"]+\" id=\"[^\"]+\"%s*href=\"([^\"]+)\".-</tr>") do
+			if Link:find("/[^/]+/[^/]+/tree") then
+				FolderCount = FolderCount + 1
+				Folders[FolderCount] = Link
+			elseif Link:find("/[^/]+/[^/]+/blob.+%.lua$") then
+				local ScriptName, ScriptClass = Link:match("([%w-_%%]+)%.?(%l*)%.lua$")
+
+				if ScriptName:lower() ~= "install" and ScriptClass ~= "ignore" and ScriptClass ~= "spec" and ScriptName:lower() ~= "spec" then
+					if ScriptClass == "mod" or ScriptClass == "module" then TypesSpecified = true end
+
+					if ScriptName == "_" or ScriptName:lower() == "main" or ScriptName:lower() == "init" then
+						ScriptCount = ScriptCount + 1
+						for a = ScriptCount, 2, -1 do
+							Scripts[a] = Scripts[a - 1]
+						end
+						Scripts[1] = Link
+						MainExists = true
+					else
+						ScriptCount = ScriptCount + 1
+						Scripts[ScriptCount] = Link
 					end
-					Scripts[1] = Link
-					MainExists = true
-				else
-					ScriptCount = ScriptCount + 1
-					Scripts[ScriptCount] = Link
 				end
 			end
 		end
@@ -140,26 +148,25 @@ local function InstallRepo(Link, Directory, Parent, Routines, TypesSpecified)
 		end
 
 		-- if MainExists or ScriptCount ~= 1 or ScriptName ~= (LastFolder:match("^RBX%-(.-)%-Library$") or LastFolder) then
-		if MainExists then Directory = Directory + 1 end -- :gsub("[^/]+$", "", 1) end
+		if MainExists then Directory = Directory + 2 end -- :gsub("[^/]+$", "", 1) end
 		local Count = 0
 
 		local function LocateFolder(FolderName)
 			Count = Count + 1
 			if Count > Directory then
 				Directory = Directory + 1
-				FolderName = FolderName:gsub("Engine$", "")
 				if (Parent and Parent.Name) ~= FolderName and "Modules" ~= FolderName then
-					local Success, Service = pcall(game.GetService, game, FolderName)
-					if FolderName ~= "Lighting" and Success and Service then
-						Parent = Service
-					else
-						local Generated
-						Parent, Generated = GetFirstChild(Parent, FolderName, "Folder")
-						if Generated then
-							if not Routines[1] then Routines[1] = Parent end
-							DataSources[Parent] = "https://github.com" .. (Sub:match(("/[^/]+"):rep(Directory > 2 and Directory + 2 or Directory)) or warn("[1]", Sub, Directory > 1 and Directory + 2 or Directory) or "")
-						end
+					-- local Success, Service = pcall(game.GetService, game, FolderName)
+					-- if FolderName ~= "Lighting" and Success and Service then
+					-- 	Parent = Service
+					-- else
+					local Generated
+					Parent, Generated = GetFirstChild(Parent, FolderName, "Folder")
+					if Generated then
+						if not Routines[1] then Routines[1] = Parent end
+						DataSources[Parent] = "https://github.com" .. (Sub:match(("/[^/]+"):rep(Directory > 2 and Directory + 2 or Directory)) or warn("[1]", Sub, Directory > 1 and Directory + 2 or Directory) or "")
 					end
+					-- end
 				end
 			end
 		end
@@ -170,7 +177,7 @@ local function InstallRepo(Link, Directory, Parent, Routines, TypesSpecified)
 			LocateFolder(LastFolder)
 		end
 
-		local Script = GetFirstChild(Parent, ScriptName, ScriptTypes[ScriptClass or TypesSpecified and "" or "mod"])
+		local Script = GetFirstChild(Parent, ScriptName, ScriptTypes[ScriptClass or TypesSpecified and "" or "mod"] or "ModuleScript")
 		if not Routines[1] then Routines[1] = Script end
 		coroutine.resume(coroutine.create(GiveSourceToScript), "https://raw.githubusercontent.com" .. ScriptLink:gsub("(/[^/]+/[^/]+/)blob/", "%1", 1), Script)
 
@@ -181,7 +188,7 @@ local function InstallRepo(Link, Directory, Parent, Routines, TypesSpecified)
 		for a = 2, ScriptCount do
 			local Link = Scripts[a]
 			local ScriptName, ScriptClass = Link:match("([%w-_%%]+)%.?(%l*)%.lua$")
-			local Script = GetFirstChild(Parent, ScriptName:gsub("Library$", "", 1):gsub("%%(%x%x)", UrlDecode), ScriptTypes[ScriptClass or TypesSpecified and "" or "mod"])
+			local Script = GetFirstChild(Parent, ScriptName:gsub("Library$", "", 1):gsub("%%(%x%x)", UrlDecode), ScriptTypes[ScriptClass or TypesSpecified and "" or "mod"] or "ModuleScript")
 			coroutine.resume(coroutine.create(GiveSourceToScript), "https://raw.githubusercontent.com" .. Link:gsub("(/[^/]+/[^/]+/)blob/", "%1", 1), Script)
 		end
 	end
@@ -219,12 +226,16 @@ function GitHub:Install(Link, Parent, RoutineList)
 		if a and b then
 			Tree, Directory = Directory:sub(6, b), Directory:sub(b + 1)
 			if Directory == "" then Directory = nil end
-			if Directory and Link:find("blob") then
+			if Directory and Link:find("blob", 1, true) then
 				ScriptName, ScriptClass = Directory:match("([%w-_%%]+)%.?(%l*)%.lua$")
 			end
 		else
 			Directory = nil
 		end
+	end
+
+	if ScriptName and (ScriptName == "_" or ScriptName:lower() == "main" or ScriptName:lower() == "init") then
+		return GitHub:Install("https://github.com/" .. Organization .. "/" .. Repository .. "/tree/" .. (Tree or "master") .. "/" .. Directory:gsub("/[^/]+$", ""):gsub("^/", ""), Parent, RoutineList)
 	end
 
 	if not Website then Website = "https://github.com/" end
@@ -240,7 +251,7 @@ function GitHub:Install(Link, Parent, RoutineList)
 	if ScriptName then
 		Link = "https://raw.githubusercontent.com/" .. Organization .. "/" .. Repository .. "/" .. (Tree or "master") .. Directory
 		local Source = GetAsync(Link)
-		local Script = GetFirstChild(Parent and not RoutineList and Repository ~= ScriptName and Parent.Name ~= ScriptName and GetFirstChild(Parent, Repository, "Folder") or Parent, ScriptName:gsub("Library$", "", 1):gsub("%%(%x%x)", UrlDecode), ScriptTypes[ScriptClass or "mod"])
+		local Script = GetFirstChild(Parent and not RoutineList and Repository ~= ScriptName and Parent.Name ~= ScriptName and Parent.Name ~= Repository and GetFirstChild(Parent, Repository, "Folder") or Parent, ScriptName:gsub("Library$", "", 1):gsub("%%(%x%x)", UrlDecode), ScriptTypes[ScriptClass or "mod"] or "ModuleScript")
 		DataSources[Script] = Link
 		if not Routines[1] then Routines[1] = Script end
 		Script.Source = Source
@@ -255,10 +266,10 @@ function GitHub:Install(Link, Parent, RoutineList)
 
 		if not Routines[1] then Routines[1] = Object end
 
-		for Link, Data in Data:gmatch('<a href="(/' .. Organization .. '/[^/]+)" itemprop="name codeRepository">(.-)</div>') do
-			if not Data:match("Forked from") and not Link:find("Plugin") then
+		for Link, Data in Data:gmatch('href="(/' .. Organization .. '/[^/]+)" itemprop="name codeRepository"(.-)</div>') do
+			--if not Data:find("Forked from", 1, true) and not Link:find("Plugin", 1, true) and not Link:find(".github.io", 1, true) then
 				GitHub:Install(Link, Object, Routines)
-			end
+			--end
 		end
 	end
 
@@ -283,6 +294,12 @@ function GitHub:Install(Link, Parent, RoutineList)
 		return Object
 	end
 end
+
+-- luacheck: pop ignore
+-- print("Installing NevermoreEngine...")
+
+local threadsCompleted = table.create(2, false)
+
 --------
 --https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/WhitelistedGames.json
 --
