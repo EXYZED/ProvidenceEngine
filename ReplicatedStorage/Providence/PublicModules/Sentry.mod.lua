@@ -1,3 +1,15 @@
+--[[
+
+File:           Sentry.lua (ModuleScript)
+Description:    Logs any errors and warning through the Sentry system.
+
+Pre-requisites: FE Compatability, Efficiency.
+
+Issuer, A:      XLNS_XYZ Danté#9120
+Privilege:      Y
+
+]]
+
 -- https://docs.sentry.io/development/sdk-dev/unified-api/#static-api
 local SentryF = script.Parent:WaitForChild("SentryF")
 local Hub = require(SentryF.Hub)
