@@ -43,7 +43,7 @@ local DataSources = {}
 
 -- Helper Functions
 local ScriptTypes = {
-	[""] = "ModuleScript";
+	[""] = "Script";
 	["local"] = "LocalScript";
 	["module"] = "ModuleScript";
 	["mod"] = "ModuleScript";
@@ -311,13 +311,26 @@ local threadsCompleted = table.create(2, false)
 --------
 --https://raw.githubusercontent.com/EXYZED/ProvidenceEngine/master/WhitelistedGames.json
 --
+
+
 local function InstallE()
-	GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/", game:GetService("ServerScriptService"))
-	wait(5)
-	local Installer = game.ServerScriptService:WaitForChild("Providence"):FindFirstChild("Installer")
-	if Installer then
-		Installer:Destroy();
-	end
+	local threadsCompleted = table.create(2, false)
+
+	spawn(function()
+		GitHub:Install(
+			"https://github.com/EXYZED/ProvidenceEngine/tree/master/System",
+			game:GetService("ServerScriptService")
+		)
+		threadsCompleted[1] = true
+	end)
+
+	spawn(function()
+		local init = GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/tree/master/ReplicatedStorage")
+		--init.Nevermore.Nevermore.Parent = game:GetService("ReplicatedStorage")
+		--init:Destroy()
+		threadsCompleted[2] = true
+	end)
+
 end
 
 local function WhitelistCheck()
