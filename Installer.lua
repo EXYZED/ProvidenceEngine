@@ -8,6 +8,14 @@ Privilege:      HIGH Y
 -- TODO: This script needs to be refactored
 -- luacheck: push ignore
 
+local ServiceState = game:GetService('HttpService').HttpEnabled
+if not ServiceState then print'Enable HttpService!'; end
+local validity = false
+
+-- Loader --
+local Hint = Instance.new('Hint')
+Hint.Text = "Loaded ProvidenceEngine"
+
 local function GetFirstChild(Parent, Name, Class)
 	if Parent then -- GetFirstChildWithNameOfClass
 		local Objects = Parent:GetChildren()
