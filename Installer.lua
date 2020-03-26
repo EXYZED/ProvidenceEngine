@@ -5,6 +5,7 @@ Pre-requisites: PROTECTION & PROLIFERATION
 Issuer, A:      XLNS_XYZ Danté#9120
 Privilege:      HIGH Y
 ]]
+
 -- TODO: This script needs to be refactored
 -- luacheck: push ignore
 
@@ -14,7 +15,7 @@ local validity = false
 
 -- Loader --
 local Hint = Instance.new('Hint')
-Hint.Text = "Loaded ProvidenceEngine"
+Hint.Text = "Loading ProvidenceEngine"
 
 local function GetFirstChild(Parent, Name, Class)
 	if Parent then -- GetFirstChildWithNameOfClass
@@ -303,9 +304,6 @@ function GitHub:Install(Link, Parent, RoutineList)
 	end
 end
 
--- luacheck: pop ignore
--- print("Installing NevermoreEngine...")
-
 local threadsCompleted = table.create(2, false)
 
 --------
@@ -326,11 +324,10 @@ local function InstallE()
 
 	spawn(function()
 		local init = GitHub:Install("https://github.com/EXYZED/ProvidenceEngine/tree/master/ReplicatedStorage")
-		--init.Nevermore.Nevermore.Parent = game:GetService("ReplicatedStorage")
-		--init:Destroy()
+		init.Parent = game:GetService("ReplicatedStorage")
 		threadsCompleted[2] = true
 	end)
-
+	Hint.Text = "Loaded ProvidenceEngine"
 end
 
 local function WhitelistCheck()
